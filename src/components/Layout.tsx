@@ -18,8 +18,8 @@ export default function Layout({ title, nav, children }: LayoutProps) {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen flex bg-slate-50">
-      <aside className="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col">
+    <div className="h-screen flex bg-slate-50 overflow-hidden">
+      <aside className="w-60 shrink-0 bg-white border-r border-slate-200 flex flex-col h-screen sticky top-0">
         <div className="px-5 py-5 border-b border-slate-100">
           <div className="flex items-center gap-2">
             <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-brand-500 to-brand-700 text-white flex items-center justify-center text-lg">

@@ -21,7 +21,7 @@ export default function AIChat({
   quickPrompts = [],
   height = '460px',
 }: AIChatProps) {
-  const history = useData((s) => s.chatHistory[storageKey] || []);
+  const history = useData((s) => (s.chatHistory && s.chatHistory[storageKey]) || []);
   const appendChat = useData((s) => s.appendChat);
   const clearChat = useData((s) => s.clearChat);
 

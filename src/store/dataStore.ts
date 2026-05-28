@@ -64,17 +64,32 @@ export const useData = create<DataState>()(
       updateSkill: (internId, score) =>
         set((s) => ({ skills: { ...s.skills, [internId]: score } })),
       appendChat: (key, msgs) =>
-        set((s) => ({
-          chatHistory: { ...s.chatHistory, [key]: [...(s.chatHistory[key] || []), ...msgs] },
-        })),
+        set((s) => {
+          const cur = s.chatHistory || {};
+          return {
+            chatHistory: { ...cur, [key]: [...(cur[key] || []), ...msgs] },
+          };
+        }),
       clearChat: (key) =>
         set((s) => {
-          const next = { ...s.chatHistory };
+          const next = { ...(s.chatHistory || {}) };
           delete next[key];
           return { chatHistory: next };
         }),
       resetAll: () => set({ ...initial }),
     }),
-    { name: 'ies_data' },
+    {
+      name: 'ies_data',
+      version: 2,
+      merge: (persisted, current) => {
+        // 老版本 localStorage 可能缺字段，这里以当前默认为底合并
+        const p = (persisted as Partial<DataState>) || {};
+        return {
+          ...current,
+          ...p,
+          chatHistory: p.chatHistory || {},
+        } as DataState;
+      },
+    },
   ),
 );
