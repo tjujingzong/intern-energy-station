@@ -4,6 +4,7 @@ import { ROLE_LABELS } from '../constants';
 import { LogOut, Settings, User as UserIcon } from 'lucide-react';
 import { ALL_USERS } from '../data/users';
 import type { ReactNode } from 'react';
+import ErrorBoundary from './ErrorBoundary';
 
 interface LayoutProps {
   title: string;
@@ -99,7 +100,9 @@ export default function Layout({ title, nav, children }: LayoutProps) {
             </div>
           </div>
         </header>
-        <main className="flex-1 overflow-auto p-6">{children}</main>
+        <main className="flex-1 overflow-auto p-6">
+          <ErrorBoundary>{children}</ErrorBoundary>
+        </main>
       </div>
     </div>
   );

@@ -4,6 +4,9 @@ import type { ChatMessage } from '../types';
 import { chat, hasKey } from '../api/deepseek';
 import { useData } from '../store/dataStore';
 
+// 模块级常量：避免 selector 每次返回新 [] 引发无限重渲染
+const EMPTY_HISTORY: ChatMessage[] = [];
+
 interface AIChatProps {
   storageKey: string;
   systemPrompt: string;
@@ -21,7 +24,7 @@ export default function AIChat({
   quickPrompts = [],
   height = '460px',
 }: AIChatProps) {
-  const history = useData((s) => (s.chatHistory && s.chatHistory[storageKey]) || []);
+  const history = useData((s) => (s.chatHistory && s.chatHistory[storageKey]) || EMPTY_HISTORY);
   const appendChat = useData((s) => s.appendChat);
   const clearChat = useData((s) => s.clearChat);
 

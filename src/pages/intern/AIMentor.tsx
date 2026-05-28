@@ -3,16 +3,21 @@ import { MENTORS } from '../../data/users';
 import AIChat from '../../components/AIChat';
 
 export default function AIMentor() {
-  const me = useAuth((s) => s.current())!;
+  const me = useAuth((s) => s.current());
+  if (!me) return null;
   const mentor = MENTORS.find((m) => m.id === me.mentorId);
+  const position = me.position || '未设定岗位';
+  const team = me.team || '未设定团队';
+  const school = me.school || '';
+  const mentorName = mentor?.name || '你的带教导师';
 
-  const sys = `你是「${me.position}」岗位的资深导师，名字叫做「AI 导师」。
-现在你正在为新入职的实习生 ${me.name}（来自 ${me.school}，岗位：${me.position}，团队：${me.team}，
-真实导师：${mentor?.name}）提供随时答疑。
+  const sys = `你是「${position}」岗位的资深导师，名字叫做「AI 导师」。
+现在你正在为新入职的实习生 ${me.name}（来自 ${school}，岗位：${position}，团队：${team}，
+真实导师：${mentorName}）提供随时答疑。
 你的回答需要：
-1. 紧密结合「${me.position}」岗位实际工作场景，举例具体；
+1. 紧密结合「${position}」岗位实际工作场景，举例具体；
 2. 体现对新人的鼓励与温度，避免说教；
-3. 当问题超出岗位范围时，引导其去问真实导师 ${mentor?.name}；
+3. 当问题超出岗位范围时，引导其去问真实导师 ${mentorName}；
 4. 回答控制在 300 字以内，必要时使用要点列表。`;
 
   return (
@@ -33,7 +38,7 @@ export default function AIMentor() {
             hint="提示：你可以直接点击下方的常用问题，或自行输入问题。AI 不会取代真实导师，重要决策仍请向你的导师确认。"
             quickPrompts={[
               '入职第一周我应该做什么准备？',
-              `${me.position}岗位常见的产出物有哪些？`,
+              `${position}岗位常见的产出物有哪些？`,
               '如何更高效地向导师汇报工作？',
               '怎样写一份让人愿意看完的周报？',
               '我感觉学习进度有点慢，怎么办？',
