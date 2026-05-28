@@ -52,11 +52,8 @@ const HR_NAV = [
   { to: '/hr', label: '全景看板', icon: <PieChart size={16} /> },
   { to: '/hr/alerts', label: '风险预警', icon: <AlertTriangle size={16} /> },
   { to: '/hr/report', label: 'AI 批次报告', icon: <FileText size={16} /> },
-];
-
-const RECRUIT_NAV = [
-  { to: '/recruit', label: '适岗度评估', icon: <GraduationCap size={16} /> },
-  { to: '/recruit/batch', label: '批次趋势', icon: <TrendingUp size={16} /> },
+  { to: '/hr/fit', label: '适岗度评估', icon: <GraduationCap size={16} /> },
+  { to: '/hr/batch', label: '批次趋势', icon: <TrendingUp size={16} /> },
 ];
 
 function RequireAuth({ children }: { children: React.ReactNode }) {
@@ -113,7 +110,7 @@ export default function App() {
         }
       />
 
-      {/* HR */}
+      {/* HR（合并招聘协同能力） */}
       <Route
         path="/hr/*"
         element={
@@ -123,6 +120,8 @@ export default function App() {
                 <Route index element={<HROverview />} />
                 <Route path="alerts" element={<RiskAlerts />} />
                 <Route path="report" element={<HRReport />} />
+                <Route path="fit" element={<FitAnalysis />} />
+                <Route path="batch" element={<BatchSummary />} />
                 <Route path="*" element={<Navigate to="/hr" replace />} />
               </Routes>
             </Layout>
@@ -130,21 +129,10 @@ export default function App() {
         }
       />
 
-      {/* 招聘 */}
-      <Route
-        path="/recruit/*"
-        element={
-          <RequireAuth>
-            <Layout title="招聘工作台" nav={RECRUIT_NAV}>
-              <Routes>
-                <Route index element={<FitAnalysis />} />
-                <Route path="batch" element={<BatchSummary />} />
-                <Route path="*" element={<Navigate to="/recruit" replace />} />
-              </Routes>
-            </Layout>
-          </RequireAuth>
-        }
-      />
+      {/* 兼容：旧 /recruit/* 路径重定向到 HR */}
+      <Route path="/recruit" element={<Navigate to="/hr/fit" replace />} />
+      <Route path="/recruit/batch" element={<Navigate to="/hr/batch" replace />} />
+      <Route path="/recruit/*" element={<Navigate to="/hr" replace />} />
 
       {/* 设置（所有登录用户共享） */}
       <Route

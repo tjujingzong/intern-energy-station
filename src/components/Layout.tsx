@@ -110,7 +110,6 @@ function RoleQuickSwitch({ onPick }: { onPick: (id: string) => void }) {
     { id: 'intern01', label: '实习生·张子轩' },
     { id: 'mentor01', label: '导师·陈思远' },
     { id: 'hr01', label: 'HR·苏晓彤' },
-    { id: 'recruit01', label: '招聘·周明远' },
   ];
   return (
     <div className="hidden md:flex items-center gap-1 text-xs text-slate-500">

@@ -52,8 +52,6 @@ export function getRoleHome(role: Role | undefined): string {
       return '/mentor';
     case 'hr':
       return '/hr';
-    case 'recruit':
-      return '/recruit';
     default:
       return '/login';
   }

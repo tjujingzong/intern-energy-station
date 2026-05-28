@@ -46,8 +46,7 @@ export const SKILL_DIMS: { key: keyof SkillScore; label: string }[] = [
 export const ROLE_LABELS: Record<string, string> = {
   intern: '实习生',
   mentor: '导师',
-  hr: 'HR',
-  recruit: '招聘',
+  hr: 'HR / 招聘',
 };
 
 // 岗位主题色

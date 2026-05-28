@@ -1,5 +1,5 @@
 // 全局类型定义
-export type Role = 'intern' | 'mentor' | 'hr' | 'recruit';
+export type Role = 'intern' | 'mentor' | 'hr';
 
 export type Position = '研发' | '产品' | '销售';
 

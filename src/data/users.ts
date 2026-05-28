@@ -9,10 +9,9 @@ export const MENTORS: User[] = [
   { id: 'mentor05', name: '李文博', role: 'mentor', avatar: '🧑‍🎓', team: '销售南区', position: '销售' },
 ];
 
-// HR 与招聘各 1 名
+// HR（同时负责招聘协同）
 export const STAFF: User[] = [
   { id: 'hr01', name: '苏晓彤', role: 'hr', avatar: '🧑‍💼', team: '人力资源部' },
-  { id: 'recruit01', name: '周明远', role: 'recruit', avatar: '🧑‍💼', team: '招聘组' },
 ];
 
 // 20 名实习生分布：研发 8 + 产品 6 + 销售 6

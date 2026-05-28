@@ -46,13 +46,13 @@ export default function Login() {
             <span className="text-brand-600">让每一位新人都能精准生长</span>
           </h1>
           <p className="text-slate-600 mt-4 leading-relaxed">
-            为实习生、导师、HR、招聘四个角色，提供标准化带教节奏、个性化成长地图、
+            为实习生、导师、HR（含招聘协同）三个角色，提供标准化带教节奏、个性化成长地图、
             AI 周报反馈与全局适岗度看板，让带教更规范、成长更可见、协同更高效。
           </p>
           <ul className="mt-6 space-y-2 text-sm text-slate-600">
             <li>· 4 阶段标准化带教 SOP，导师无需凭经验</li>
             <li>· AI 周报助手 + AI 导师答疑，实习生不再迷茫</li>
-            <li>· HR 与招聘共用风险预警与适岗评估</li>
+            <li>· HR 一站式掌握风险预警与适岗度评估</li>
             <li>· 数据全部在浏览器，安全可控（DeepSeek Key 可选）</li>
           </ul>
         </div>
@@ -99,7 +99,7 @@ export default function Login() {
                 ))}
               </div>
               <div className="flex flex-wrap items-center gap-2">
-                <span className="w-12 text-slate-400">协同</span>
+                <span className="w-12 text-slate-400">HR</span>
                 {STAFF.map((u) => (
                   <QuickPick key={u.id} uid={u.id} label={`${u.id} · ${u.name}`} />
                 ))}
