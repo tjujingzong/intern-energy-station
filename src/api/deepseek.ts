@@ -1,10 +1,26 @@
 import type { ChatMessage } from '../types';
 
 const ENDPOINT = 'https://api.deepseek.com/v1/chat/completions';
-const MODEL = 'deepseek-chat';
 
-export function getKey() {
-  return localStorage.getItem('deepseek_key') || '';
+// 默认模型（可被 .env 里的 VITE_DEEPSEEK_MODEL 覆盖）
+export const DEFAULT_MODEL = 'deepseek-v4-flash';
+export const MODEL =
+  (import.meta.env.VITE_DEEPSEEK_MODEL as string | undefined) || DEFAULT_MODEL;
+
+// 打包时注入的 Key（作为底层兑底）
+const ENV_KEY = (import.meta.env.VITE_DEEPSEEK_API_KEY as string | undefined) || '';
+
+/** 返回当前生效的 Key：优先读用户手差入的 localStorage，其次用 .env 注入的兑底 Key */
+export function getKey(): string {
+  return localStorage.getItem('deepseek_key') || ENV_KEY || '';
+}
+
+/** Key 来源：用户手差入 / .env 预设 / 未配置 */
+export type KeySource = 'user' | 'env' | 'none';
+export function getKeySource(): KeySource {
+  if (localStorage.getItem('deepseek_key')) return 'user';
+  if (ENV_KEY) return 'env';
+  return 'none';
 }
 
 export function hasKey() {

@@ -58,7 +58,7 @@ export default function Layout({ title, nav, children }: LayoutProps) {
 
         <div className="px-3 py-3 border-t border-slate-100 space-y-1">
           <NavLink
-            to="/settings"
+            to={`${getRoleHome(me?.role)}/settings`}
             className={({ isActive }) =>
               `flex items-center gap-2 px-3 py-2 rounded-lg text-sm transition ${
                 isActive ? 'bg-brand-50 text-brand-700 font-medium' : 'text-slate-600 hover:bg-slate-100'

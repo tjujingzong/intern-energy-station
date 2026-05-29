@@ -68,6 +68,11 @@ function RoleHomeRedirect() {
   return <Navigate to={getRoleHome(me?.role)} replace />;
 }
 
+function SettingsRedirect() {
+  const me = useAuth((s) => s.current());
+  return <Navigate to={`${getRoleHome(me?.role)}/settings`} replace />;
+}
+
 export default function App() {
   return (
     <Routes>
@@ -85,6 +90,7 @@ export default function App() {
                 <Route path="growth" element={<GrowthMap />} />
                 <Route path="report" element={<WeeklyReport />} />
                 <Route path="ai" element={<AIMentor />} />
+                <Route path="settings" element={<Settings />} />
                 <Route path="*" element={<Navigate to="/intern" replace />} />
               </Routes>
             </Layout>
@@ -103,6 +109,7 @@ export default function App() {
                 <Route path="mentee/:id" element={<MenteeDetail />} />
                 <Route path="feedback" element={<FeedbackEditor />} />
                 <Route path="templates" element={<Templates />} />
+                <Route path="settings" element={<Settings />} />
                 <Route path="*" element={<Navigate to="/mentor" replace />} />
               </Routes>
             </Layout>
@@ -122,6 +129,7 @@ export default function App() {
                 <Route path="report" element={<HRReport />} />
                 <Route path="fit" element={<FitAnalysis />} />
                 <Route path="batch" element={<BatchSummary />} />
+                <Route path="settings" element={<Settings />} />
                 <Route path="*" element={<Navigate to="/hr" replace />} />
               </Routes>
             </Layout>
@@ -134,17 +142,8 @@ export default function App() {
       <Route path="/recruit/batch" element={<Navigate to="/hr/batch" replace />} />
       <Route path="/recruit/*" element={<Navigate to="/hr" replace />} />
 
-      {/* 设置（所有登录用户共享） */}
-      <Route
-        path="/settings"
-        element={
-          <RequireAuth>
-            <Layout title="个人设置" nav={[]}>
-              <Settings />
-            </Layout>
-          </RequireAuth>
-        }
-      />
+      {/* 兼容：旧 /settings 路径重定向到当前角色的 settings */}
+      <Route path="/settings" element={<SettingsRedirect />} />
 
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
